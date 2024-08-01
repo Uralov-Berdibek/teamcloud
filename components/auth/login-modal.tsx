@@ -1,15 +1,11 @@
 import useLoginModal from '@/hooks/useLoginModal';
 import useRegisterModal from '@/hooks/useRegisterModal';
-import { zodResolver } from '@hookform/resolvers/zod';
-import axios from 'axios';
 import { AlertCircle } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '../ui/form';
 import { Input } from '../ui/input';
-import { signIn } from 'next-auth/react';
-import { loginSchema } from '../../lib/validation';
 import Modal from '../shared/modal';
 import Button from '../ui/button';
 import { useRouter } from 'next/navigation';
