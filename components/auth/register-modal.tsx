@@ -1,7 +1,6 @@
 import useLoginModal from '@/hooks/useLoginModal';
 import useRegisterModal from '@/hooks/useRegisterModal';
-import { registerStep1Schema, registerStep2Schema } from '@/lib/validation';
-import { AlertCircle, Divide } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
 import Button from '../ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '../ui/form';
