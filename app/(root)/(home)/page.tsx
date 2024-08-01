@@ -188,7 +188,7 @@ const Home = () => {
 
               <div className='about-content'>
                 <h2 className='h2 section-title'>
-                  We've been helping <span className='span'>customers</span> globally.
+                  Weve been helping <span className='span'>customers</span> globally.
                 </h2>
 
                 <p className='section-text'>
