@@ -8,6 +8,8 @@ import { Input } from '../ui/input';
 import Modal from '../shared/modal';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation'; // or 'react-router-dom' if using React Router
+import axios from 'axios';
 
 export default function RegisterModal() {
   const [step, setStep] = useState(1);
@@ -21,14 +23,23 @@ export default function RegisterModal() {
 
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
+  const router = useRouter();
 
   const onToggle = useCallback(() => {
     registerModal.onClose();
     loginModal.onOpen();
   }, [loginModal, registerModal]);
 
+  const handleNextStep = () => {
+    setStep(2);
+  };
+
   const bodyContent =
-    step === 1 ? <RegisterStep1 setData={[]} setStep={1} /> : <RegisterStep2 data={data} />;
+    step === 1 ? (
+      <RegisterStep1 setData={setData} setStep={handleNextStep} />
+    ) : (
+      <RegisterStep2 data={data} onSuccess={() => router.push('/dashboard')} />
+    );
 
   const footer = (
     <div className='text-neutral-400 text-center mb-4'>
@@ -53,13 +64,34 @@ export default function RegisterModal() {
   );
 }
 
-function RegisterStep1({ setData, setStep }: { setData: []; setStep: 1 }) {
+function RegisterStep1({
+  setData,
+  setStep,
+}: {
+  setData: (data: any) => void;
+  setStep: () => void;
+}) {
   const [error, setError] = useState('');
   const form = useForm();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = form;
+
+  const onSubmit = async (formData: any) => {
+    try {
+      const response = await axios.post('http://localhost:8090/api/v1/auth/register', formData);
+      setData(formData); // Save the data for the next step
+      setStep(); // Move to the next step
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'An error occurred');
+    }
+  };
 
   return (
     <Form {...form}>
-      <form className='space-y-4 px-12'>
+      <form className='space-y-4 px-12' onSubmit={handleSubmit(onSubmit)}>
         {error && (
           <Alert variant='destructive'>
             <AlertCircle className='h-4 w-4' />
@@ -71,10 +103,10 @@ function RegisterStep1({ setData, setStep }: { setData: []; setStep: 1 }) {
           <FormField
             control={form.control}
             name='firstname'
-            render={({}) => (
+            render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder='First name' />
+                  <Input placeholder='First name' {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -83,10 +115,10 @@ function RegisterStep1({ setData, setStep }: { setData: []; setStep: 1 }) {
           <FormField
             control={form.control}
             name='lastname'
-            render={({}) => (
+            render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder='Last name' />
+                  <Input placeholder='Last name' {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -96,24 +128,23 @@ function RegisterStep1({ setData, setStep }: { setData: []; setStep: 1 }) {
         <FormField
           control={form.control}
           name='email'
-          render={({}) => (
+          render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder='Email' />
+                <Input placeholder='Email' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-
         <div className='flex items-center gap-2'>
           <FormField
             control={form.control}
             name='password'
-            render={({}) => (
+            render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder='Password' type='password' />
+                  <Input placeholder='Password' type='password' {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -122,10 +153,10 @@ function RegisterStep1({ setData, setStep }: { setData: []; setStep: 1 }) {
           <FormField
             control={form.control}
             name='confirmPassword'
-            render={({}) => (
+            render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder='Password' type='password' />
+                  <Input placeholder='Confirm Password' type='password' {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -138,14 +169,33 @@ function RegisterStep1({ setData, setStep }: { setData: []; setStep: 1 }) {
   );
 }
 
-function RegisterStep2({ data }: { data: { firstname: string; lastname: string; email: string } }) {
+function RegisterStep2({ data, onSuccess }: { data: any; onSuccess: () => void }) {
   const [error, setError] = useState('');
-  const registerModal = useRegisterModal();
+  const [confirmationCode, setConfirmationCode] = useState('');
   const form = useForm();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = form;
+
+  const onSubmit = async (formData: any) => {
+    try {
+      const response = await axios.get('http://localhost:8090/api/v1/auth/activate-account', {
+        params: { code: formData.confirmationCode },
+      });
+      // Save tokens to cookies/local storage
+      localStorage.setItem('accessToken', response.data.accessToken);
+      document.cookie = `refreshToken=${response.data.refreshToken}; path=/`;
+      onSuccess(); // Redirect to dashboard
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'An error occurred');
+    }
+  };
 
   return (
     <Form {...form}>
-      <form className='space-y-4 px-12'>
+      <form className='space-y-4 px-12' onSubmit={handleSubmit(onSubmit)}>
         {error && (
           <Alert variant='destructive'>
             <AlertCircle className='h-4 w-4' />
@@ -155,11 +205,11 @@ function RegisterStep2({ data }: { data: { firstname: string; lastname: string; 
         )}
         <FormField
           control={form.control}
-          name='email_password'
-          render={({}) => (
+          name='confirmationCode'
+          render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder='Password' type='password' />
+                <Input placeholder='Confirmation Code' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

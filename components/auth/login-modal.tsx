@@ -9,10 +9,11 @@ import { Input } from '../ui/input';
 import Modal from '../shared/modal';
 import Button from '../ui/button';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 export default function LoginModal() {
   const [error, setError] = useState('');
-
+  const form = useForm();
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const router = useRouter();
@@ -22,11 +23,24 @@ export default function LoginModal() {
     registerModal.onOpen();
   }, [loginModal, registerModal]);
 
-  const form = useForm();
+  const onSubmit = async (formData: any) => {
+    try {
+      const response = await axios.post('http://localhost:8090/api/v1/auth/authenticate', formData);
+
+      // Save tokens to cookies/local storage
+      localStorage.setItem('accessToken', response.data.accessToken);
+      document.cookie = `refreshToken=${response.data.refreshToken}; path=/`;
+
+      // Redirect to dashboard
+      router.push('/dashboard');
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'An error occurred');
+    }
+  };
 
   const bodyContent = (
     <Form {...form}>
-      <form className='space-y-4 px-12'>
+      <form className='space-y-4 px-12' onSubmit={form.handleSubmit(onSubmit)}>
         {error && (
           <Alert variant='destructive'>
             <AlertCircle className='h-4 w-4' />

@@ -39,7 +39,7 @@ const Home = () => {
             {/* <ion-icon name='menu-outline' aria-hidden='true'></ion-icon> */}
           </button>
 
-          <Link href='/auth' className='btn btn-primary'>
+          <Link href='/auth' className='btnh btn-primary-h'>
             Get Started
           </Link>
 
@@ -61,7 +61,7 @@ const Home = () => {
                   experiences, without limitations
                 </p>
                 <Link href='/auth'>
-                  <button className='btn btn-primary'>Get Started</button>
+                  <button className='btnh btn-primary-h'>Get Started</button>
                 </Link>
               </div>
 
@@ -86,8 +86,7 @@ const Home = () => {
 
                 <p className='section-text'>
                   Streamlined orchestration, simplified and unified workflows, and real-time updates
-                  across infrastructure, workflows, websites and teams — all supported by
-                  Enterprise-grade security, services, and a world-class partner ecosystem.
+                  across infrastructure, workflows, websites and teams.
                 </p>
               </div>
 
@@ -113,7 +112,7 @@ const Home = () => {
                     <p className='card-text'>
                       Cloud Core is a frontend cloud solution for developers to build and deploy
                       future-proof digital solutions with modern, composable tooling that works with
-                      all modern frameworks.
+                      all modern frameworks and library.
                     </p>
                   </div>
                 </li>
@@ -196,9 +195,9 @@ const Home = () => {
                   lorem, vulputate at sapien sit amet, auctor iaculis lorem.
                 </p>
 
-                <a href='#' className='btn btn-outline'>
+                <Link href='/auth' className='btnh btn-outline-h'>
                   Get Started
-                </a>
+                </Link>
               </div>
             </div>
           </section>
