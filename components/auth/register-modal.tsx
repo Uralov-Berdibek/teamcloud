@@ -182,7 +182,7 @@ function RegisterStep2({ data, onSuccess }: { data: any; onSuccess: () => void }
   const onSubmit = async (formData: any) => {
     try {
       const response = await axios.get('http://localhost:8090/api/v1/auth/activate-account', {
-        params: { code: formData.confirmationCode },
+        params: { token: formData.confirmationCode },
       });
       // Save tokens to cookies/local storage
       localStorage.setItem('accessToken', response.data.accessToken);
