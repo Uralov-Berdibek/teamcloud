@@ -25,7 +25,11 @@ const Auth = () => {
     handlePageReload();
   }, []);
 
-  return <AuthComponent />;
+  return (
+    <div className='container h-screen mx-auto max-w-7xl'>
+      <AuthComponent />
+    </div>
+  );
 };
 
 export default Auth;

@@ -458,7 +458,7 @@ body.active {
 }
 
 .service-card {
-  width: 380px;
+  width: 370px;
   background-color: var(--white);
   padding: 50px 30px;
   border-radius: var(--radius-4);

@@ -8,7 +8,7 @@ import { Input } from '../ui/input';
 import Modal from '../shared/modal';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/navigation'; // or 'react-router-dom' if using React Router
+import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 export default function RegisterModal() {

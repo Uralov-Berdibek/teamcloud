@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
+import { Menu, Facebook, Instagram, Twitter, Globe } from 'lucide-react';
+
 import './style.css';
 
 const Home = () => {
@@ -32,16 +34,17 @@ const Home = () => {
                   About
                 </a>
               </li>
-
-              <Link href='/auth' className='btnh btn-primary-h'>
-                Get Started
-              </Link>
             </ul>
           </nav>
 
           <button className='nav-open-btn' aria-label='open menu' data-nav-toggler>
+            <Menu />
             {/* <ion-icon name='menu-outline' aria-hidden='true'></ion-icon> */}
           </button>
+
+          <Link href='/auth' className='btnh btn-primary-h hidden md:inline'>
+            Get Started
+          </Link>
 
           <div className='overlay' data-nav-toggler data-overlay></div>
         </div>
@@ -223,25 +226,25 @@ const Home = () => {
               <ul className='social-list'>
                 <li>
                   <a href='#' className='social-link'>
-                    {/* <ion-icon name='logo-facebook'></ion-icon> */}
+                    <Facebook />
                   </a>
                 </li>
 
                 <li>
                   <a href='#' className='social-link'>
-                    {/* <ion-icon name='logo-twitter'></ion-icon> */}
+                    <Instagram />
                   </a>
                 </li>
 
                 <li>
                   <a href='#' className='social-link'>
-                    {/* <ion-icon name='logo-pinterest'></ion-icon> */}
+                    <Twitter />
                   </a>
                 </li>
 
                 <li>
                   <a href='#' className='social-link'>
-                    {/* <ion-icon name='logo-dribbble'></ion-icon> */}
+                    <Globe />
                   </a>
                 </li>
               </ul>
