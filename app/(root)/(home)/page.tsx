@@ -32,16 +32,16 @@ const Home = () => {
                   About
                 </a>
               </li>
+
+              <Link href='/auth' className='btnh btn-primary-h'>
+                Get Started
+              </Link>
             </ul>
           </nav>
 
           <button className='nav-open-btn' aria-label='open menu' data-nav-toggler>
             {/* <ion-icon name='menu-outline' aria-hidden='true'></ion-icon> */}
           </button>
-
-          <Link href='/auth' className='btnh btn-primary-h'>
-            Get Started
-          </Link>
 
           <div className='overlay' data-nav-toggler data-overlay></div>
         </div>
