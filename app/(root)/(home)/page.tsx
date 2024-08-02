@@ -195,7 +195,7 @@ const Home = () => {
                   lorem, vulputate at sapien sit amet, auctor iaculis lorem.
                 </p>
 
-                <Link href='/auth' className='btnh btn-primary-h'>
+                <Link href='/auth' className='btnh btn-primary-h text-center'>
                   Get Started
                 </Link>
               </div>
