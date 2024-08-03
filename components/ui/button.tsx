@@ -32,7 +32,7 @@ export default function Button({
       onClick={onClick}
       type={type}
       className={cn(
-        'rounded-full font-semibold border transition hover:opacity-80 disabled:opacity-70 disabled:cursor-not-allowed',
+        'rounded-[15px] font-semibold border transition hover:opacity-80 disabled:opacity-70 disabled:cursor-not-allowed',
         fullWidth ? 'w-full' : 'w-fit',
         secondary ? 'bg-sky-500 text-white' : 'bg-white text-black',
         large ? 'text-xl px-5 py-3' : 'text-md px-4 py-3',
