@@ -20,7 +20,7 @@ const About = () => {
 
         <div className='w-full md:w-[50%] mt-10 md:mt-0 md:ml-20 text-center md:text-left'>
           <h2 className='text-4xl sm:text-5xl md:text-6xl font-semibold leading-normal'>
-            We've been helping <span className='text-blue-500'>customers</span> globally.
+            Weve been helping <span className='text-blue-500'>customers</span> globally.
           </h2>
 
           <p className='text-lg sm:text-xl md:text-2xl leading-relaxed tracking-wider text-gray-700 my-4'>
