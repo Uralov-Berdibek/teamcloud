@@ -53,12 +53,6 @@ const Header = () => {
               </a>
             </li>
           </ul>
-          <Link
-            href='/auth'
-            className='mt-4 md:mt-0 py-3 px-5 bg-sky-500 text-white font-medium rounded-[5px] hidden lg:inline'
-          >
-            Get Started
-          </Link>
         </nav>
 
         <button
@@ -69,6 +63,13 @@ const Header = () => {
         >
           {isMobileMenuOpen ? <X /> : <Menu />}
         </button>
+
+        <Link
+          href='/auth'
+          className='mt-4 md:mt-0 py-3 px-5 bg-sky-500 text-white font-medium rounded-[5px] hidden lg:inline'
+        >
+          Get Started
+        </Link>
       </div>
     </header>
   );

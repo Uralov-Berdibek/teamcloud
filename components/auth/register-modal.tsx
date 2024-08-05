@@ -99,7 +99,7 @@ function RegisterStep1({
             <AlertDescription>{error}</AlertDescription>
           </Alert>
         )}
-        <div className='flex items-center gap-2'>
+        <div className='flex justify-between items-center'>
           <FormField
             control={form.control}
             name='firstname'
@@ -137,7 +137,7 @@ function RegisterStep1({
             </FormItem>
           )}
         />
-        <div className='flex items-center gap-2'>
+        <div className='flex justify-between items-center'>
           <FormField
             control={form.control}
             name='password'
