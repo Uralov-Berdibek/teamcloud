@@ -6,10 +6,11 @@ import Button from '../ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '../ui/form';
 import { Input } from '../ui/input';
 import Modal from '../shared/modal';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export default function RegisterModal() {
   const [step, setStep] = useState(1);
@@ -38,7 +39,13 @@ export default function RegisterModal() {
     step === 1 ? (
       <RegisterStep1 setData={setData} setStep={handleNextStep} />
     ) : (
-      <RegisterStep2 data={data} onSuccess={() => router.push('/dashboard')} />
+      <RegisterStep2
+        data={data}
+        onSuccess={() => {
+          toast.success('You have been registered! Please sign in.');
+          onToggle();
+        }}
+      />
     );
 
   const footer = (
@@ -81,7 +88,7 @@ function RegisterStep1({
 
   const onSubmit = async (formData: any) => {
     try {
-      const response = await axios.post('http://localhost:8090/api/v1/auth/register', formData);
+      await axios.post('http://localhost:8090/api/v1/auth/register', formData);
       setData(formData); // Save the data for the next step
       setStep(); // Move to the next step
     } catch (err: any) {
@@ -99,7 +106,7 @@ function RegisterStep1({
             <AlertDescription>{error}</AlertDescription>
           </Alert>
         )}
-        <div className='flex justify-between items-center'>
+        <div className='flex justify-between items-center gap-2'>
           <FormField
             control={form.control}
             name='firstname'
@@ -137,7 +144,7 @@ function RegisterStep1({
             </FormItem>
           )}
         />
-        <div className='flex justify-between items-center'>
+        <div className='flex justify-between items-center gap-2'>
           <FormField
             control={form.control}
             name='password'
@@ -171,7 +178,8 @@ function RegisterStep1({
 
 function RegisterStep2({ data, onSuccess }: { data: any; onSuccess: () => void }) {
   const [error, setError] = useState('');
-  const [confirmationCode, setConfirmationCode] = useState('');
+  const [time, setTime] = useState(60);
+  const [canResend, setCanResend] = useState(false);
   const form = useForm();
   const {
     handleSubmit,
@@ -179,15 +187,39 @@ function RegisterStep2({ data, onSuccess }: { data: any; onSuccess: () => void }
     formState: { errors },
   } = form;
 
+  console.log(data);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime((prevTime) => {
+        if (prevTime > 0) return prevTime - 1;
+        setCanResend(true);
+        clearInterval(timer);
+        return 0;
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   const onSubmit = async (formData: any) => {
     try {
       const response = await axios.get('http://localhost:8090/api/v1/auth/activate-account', {
         params: { token: formData.confirmationCode },
       });
-      // Save tokens to cookies/local storage
-      localStorage.setItem('accessToken', response.data.accessToken);
-      document.cookie = `refreshToken=${response.data.refreshToken}; path=/`;
       onSuccess(); // Redirect to dashboard
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'An error occurred');
+    }
+  };
+
+  const resendCode = async () => {
+    try {
+      await axios.post('http://localhost:8090/api/v1/auth/resend-activation-code', null, {
+        params: { email: data.email },
+      });
+      toast.info('Activation code resent to your email.');
+      setCanResend(false);
+      setTime(60);
     } catch (err: any) {
       setError(err.response?.data?.message || 'An error occurred');
     }
@@ -215,6 +247,17 @@ function RegisterStep2({ data, onSuccess }: { data: any; onSuccess: () => void }
             </FormItem>
           )}
         />
+        <div className='text-neutral-400 text-center mb-4'>
+          <p onClick={resendCode}>
+            Resend code in{' '}
+            {canResend ? (
+              <span className='underline cursor-pointer'>email</span>
+            ) : (
+              `${time} seconds`
+            )}
+            .
+          </p>
+        </div>
         <Button label={'Register'} type='submit' secondary fullWidth padding />
       </form>
     </Form>
