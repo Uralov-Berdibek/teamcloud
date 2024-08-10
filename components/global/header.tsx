@@ -1,7 +1,6 @@
 import React from 'react';
 import { FiSearch, FiSettings, FiHelpCircle } from 'react-icons/fi';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import Button from '../ui/button';
 
 const Header = () => {
   return (

@@ -60,16 +60,18 @@ const Auth = () => {
                   secondary
                 />
               </Link>
-              <Button
-                label={
-                  <div className='flex gap-2 items-center justify-center'>
-                    <AiFillGithub />
-                    Sign up with Github
-                  </div>
-                }
-                fullWidth
-                secondary
-              />
+              <Link href='http://localhost:8090/oauth2/authorization/github'>
+                <Button
+                  label={
+                    <div className='flex gap-2 items-center justify-center'>
+                      <AiFillGithub />
+                      Sign up with Github
+                    </div>
+                  }
+                  fullWidth
+                  secondary
+                />
+              </Link>
               <div className='flex items-center justify-center'>
                 <div className='h-px bg-gray-700 w-1/2' />
                 <p className='mx-4'>or</p>
