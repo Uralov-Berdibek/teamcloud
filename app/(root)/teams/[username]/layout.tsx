@@ -1,40 +1,40 @@
 import React from 'react';
-import Sidebar from '../../../components/global/sidebar';
+import Header from '../../../../components/global/header';
+import Sidebar from '../../../../components/global/sidebar';
 import { RiHome6Line } from 'react-icons/ri';
 import { TbWorldWww } from 'react-icons/tb';
 import { FiHelpCircle, FiSettings } from 'react-icons/fi';
 import { SiGoogledocs } from 'react-icons/si';
-import Header from '../../../components/global/header';
 
 const SidebarItem = [
   {
-    name: 'Site Overwiev',
+    name: 'Home',
     icon: <RiHome6Line className='mr-2 text-3xl' />,
-    link: '/',
+    link: '/teams/berdibek/',
     isActive: true,
   },
   {
-    name: 'Site configuration',
+    name: 'Domians',
     icon: <TbWorldWww className='mr-2 text-3xl' />,
-    link: '/configuration',
+    link: '/teams/berdibek/domians',
     isActive: false,
   },
   {
-    name: 'Deploys',
+    name: 'Team Settings',
     icon: <FiSettings className='mr-2 text-3xl' />,
-    link: '/deploys',
+    link: '/teams/berdibek/teams-settigns',
     isActive: false,
   },
   {
-    name: 'Logs',
+    name: 'Documentation',
     icon: <SiGoogledocs className='mr-2 text-3xl' />,
-    link: '/logs',
+    link: '/teams/berdibek/docs',
     isActive: false,
   },
   {
-    name: 'Integrations',
+    name: 'Support',
     icon: <FiHelpCircle className='mr-2 text-3xl' />,
-    link: '/integrations',
+    link: '/teams/berdibek/support',
     isActive: false,
   },
 ];
