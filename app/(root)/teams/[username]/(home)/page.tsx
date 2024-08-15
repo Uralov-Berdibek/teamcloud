@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import AllSites from '../../../../../components/shared/all-sites';
 import RecentSites from '../../../../../components/shared/recent-sites';
 

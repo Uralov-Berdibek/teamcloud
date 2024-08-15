@@ -30,7 +30,7 @@ const RecentSites = ({ sites }: Props) => {
         </thead>
         <tbody>
           {sites.map((site) => (
-            <tr key={site.id} className='border-t'>
+            <tr key={site.id} className='border-t cursor-pointer'>
               <td className='p-4'>
                 <div className='flex items-center'>
                   <div className='bg-[#cbdfff] w-[40px] h-[40px] flex items-center justify-center rounded-lg'>

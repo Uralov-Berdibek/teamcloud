@@ -31,7 +31,7 @@ const AllSites = ({ sites }: Props) => {
       </div>
       <div className='grid grid-cols-3 gap-4'>
         {sites.map((site) => (
-          <div key={site.id} className='p-6 bg-white rounded-lg shadow'>
+          <div key={site.id} className='p-6 bg-white rounded-lg shadow cursor-pointer'>
             <div className='flex justify-between mb-10'>
               <div className='flex items-center'>
                 <div className='bg-[#cbdfff] w-[40px] h-[40px] flex items-center justify-center rounded-lg'>

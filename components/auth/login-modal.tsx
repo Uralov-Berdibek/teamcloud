@@ -1,7 +1,9 @@
+'use client';
+
 import useLoginModal from '@/hooks/useLoginModal';
 import useRegisterModal from '@/hooks/useRegisterModal';
 import { AlertCircle } from 'lucide-react';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '../ui/form';
@@ -13,10 +15,22 @@ import axios from 'axios';
 
 export default function LoginModal() {
   const [error, setError] = useState('');
+  const [data, setData] = useState([]);
   const form = useForm();
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const router = useRouter();
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:8090/api/v1/user')
+      .then((response) => {
+        setData(response.data); // Javobdan olingan ma'lumotlarni state-ga saqlash
+      })
+      .catch((error) => {
+        console.error('There was an error!', error);
+      });
+  }, []);
 
   const onToggle = useCallback(() => {
     loginModal.onClose();
@@ -32,7 +46,7 @@ export default function LoginModal() {
       document.cookie = `refreshToken=${response.data.refreshToken}; path=/`;
 
       // Redirect to dashboard
-      router.push('/dashboard');
+      router.push(`/teams/berdibek`);
     } catch (err: any) {
       setError(err.response?.data?.message || 'An error occurred');
     }
