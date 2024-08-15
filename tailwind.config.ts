@@ -74,7 +74,8 @@ const config = {
       },
     },
     fontFamily:{
-      lato:["Lato",'sans-serif']
+      lato:["Lato","sans-serif"],
+      inter:[ "Inter", "sans-serif"]
     }
   },
   plugins: [require("tailwindcss-animate")],
