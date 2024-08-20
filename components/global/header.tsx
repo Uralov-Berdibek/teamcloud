@@ -8,7 +8,7 @@ const Header = () => {
     <header className='flex items-center justify-between mb-8'>
       <div>
         <h2 className='text-2xl font-semibold text-[#051F61]'>Team Cloud</h2>
-        <p className='text-[#051F61]'>Welcome, Berdibek Uralov! 👋</p>
+        <p className='text-[#051F61]'>Welcome! 👋</p>
       </div>
       <div className='flex items-center'>
         <div className='flex items-center px-4 py-2 border rounded-lg bg-white'>
@@ -27,7 +27,7 @@ const Header = () => {
         <div className='ml-4 w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center'>
           <Avatar>
             <AvatarImage src='https://github.com/shadcn.png' alt='@shadcn' />
-            <AvatarFallback>BU</AvatarFallback>
+            <AvatarFallback>AA</AvatarFallback>
           </Avatar>
         </div>
       </div>

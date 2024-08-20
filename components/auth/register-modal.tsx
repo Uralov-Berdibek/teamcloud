@@ -11,6 +11,7 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { UserType } from '../../types';
 
 export default function RegisterModal() {
   const [step, setStep] = useState(1);
@@ -176,7 +177,7 @@ function RegisterStep1({
   );
 }
 
-function RegisterStep2({ data, onSuccess }: { data: any; onSuccess: () => void }) {
+function RegisterStep2({ data, onSuccess }: { data: UserType; onSuccess: () => void }) {
   const [error, setError] = useState('');
   const [time, setTime] = useState(60);
   const [canResend, setCanResend] = useState(false);
@@ -186,8 +187,6 @@ function RegisterStep2({ data, onSuccess }: { data: any; onSuccess: () => void }
     register,
     formState: { errors },
   } = form;
-
-  console.log(data);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -248,10 +247,12 @@ function RegisterStep2({ data, onSuccess }: { data: any; onSuccess: () => void }
           )}
         />
         <div className='text-neutral-400 text-center mb-4'>
-          <p onClick={resendCode}>
+          <p>
             Resend code in{' '}
             {canResend ? (
-              <span className='underline cursor-pointer'>email</span>
+              <span className='underline cursor-pointer' onClick={resendCode}>
+                email
+              </span>
             ) : (
               `${time} seconds`
             )}

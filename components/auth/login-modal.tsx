@@ -15,22 +15,11 @@ import axios from 'axios';
 
 export default function LoginModal() {
   const [error, setError] = useState('');
-  const [data, setData] = useState([]);
+  const [userData, setUserData] = useState();
   const form = useForm();
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const router = useRouter();
-
-  useEffect(() => {
-    axios
-      .get('http://localhost:8090/api/v1/user')
-      .then((response) => {
-        setData(response.data); // Javobdan olingan ma'lumotlarni state-ga saqlash
-      })
-      .catch((error) => {
-        console.error('There was an error!', error);
-      });
-  }, []);
 
   const onToggle = useCallback(() => {
     loginModal.onClose();
@@ -40,10 +29,6 @@ export default function LoginModal() {
   const onSubmit = async (formData: any) => {
     try {
       const response = await axios.post('http://localhost:8090/api/v1/auth/authenticate', formData);
-
-      // Save tokens to cookies/local storage
-      localStorage.setItem('accessToken', response.data.accessToken);
-      document.cookie = `refreshToken=${response.data.refreshToken}; path=/`;
 
       // Redirect to dashboard
       router.push(`/teams/berdibek`);

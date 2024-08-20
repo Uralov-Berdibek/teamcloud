@@ -1,59 +1,45 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Header from '../../../components/global/header';
 import Sidebar from '../../../components/global/sidebar';
 import { RiHome6Line } from 'react-icons/ri';
 import { TbWorldWww } from 'react-icons/tb';
 import { FiHelpCircle, FiSettings } from 'react-icons/fi';
 import { SiGoogledocs } from 'react-icons/si';
-import axios from 'axios';
+import useAuth from '../../../hooks/useAuth';
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get('http://localhost:8090/api/v1/user')
-      .then((response) => {
-        const userData = response.data; // Birinchi foydalanuvchini olish
-        setData(userData);
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error('There was an error!', error);
-      });
-  }, []);
-
+  useAuth();
   const sidebarItems = [
     {
       name: 'Home',
       icon: <RiHome6Line className='mr-2 text-3xl' />,
-      link: `/teams/berdibek/`,
+      link: '/teams/berdibek/',
       isActive: true,
     },
     {
       name: 'Domains',
       icon: <TbWorldWww className='mr-2 text-3xl' />,
-      link: `/teams/berdibek/domains`,
+      link: '/teams/berdibek/domains',
       isActive: false,
     },
     {
       name: 'Team Settings',
       icon: <FiSettings className='mr-2 text-3xl' />,
-      link: `/teams/berdibek/team-settings`,
+      link: '/teams/berdibek/team-settings',
       isActive: false,
     },
     {
       name: 'Documentation',
       icon: <SiGoogledocs className='mr-2 text-3xl' />,
-      link: `/teams/berdibek/docs`,
+      link: '/teams/berdibek/docs',
       isActive: false,
     },
     {
       name: 'Support',
       icon: <FiHelpCircle className='mr-2 text-3xl' />,
-      link: `/teams/berdibek/support`,
+      link: '/teams/berdibek/support',
       isActive: false,
     },
   ];

@@ -1,15 +1,30 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
+import Cookie from 'js-cookie';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [dashboardLink, setDashboardLink] = useState<string>('');
 
   const handleMenuToggle = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
+  const generateDashboardLink = useCallback(() => {
+    const userFirstname = Cookie.get('firstname'); // Assuming the cookie name is 'firstname'
+    if (userFirstname) {
+      setDashboardLink(`/teams/${userFirstname}`);
+    }
+  }, []);
+
+  console.log(`dashboard-link: ${dashboardLink}`);
+
+  useEffect(() => {
+    generateDashboardLink();
+  }, [generateDashboardLink]);
 
   return (
     <header className='w-full max-w-[1120px] mx-auto container' data-header>
@@ -65,7 +80,7 @@ const Header = () => {
         </button>
 
         <Link
-          href='/auth'
+          href={dashboardLink}
           className='mt-4 md:mt-0 py-3 px-5 bg-sky-500 text-white font-medium rounded-[5px] hidden lg:inline'
         >
           Get Started
