@@ -14,7 +14,7 @@ const Card: React.FC<CardProps> = ({item}) => {
         <h3 className='font-lato font-semibold text-xl text-[#757897]'>{item}</h3>
         <span className='py-2 px-[50.5px] rounded-[8px] bg-[#EBF2FF] text-[#0061FF]'>Active</span>
     </div>
-    <div className='w-full flex justify-between items-start pl-[36px] pr-[55px] pt-[41px] pb-[46px] bg-[#FFFFFF] rounded-[15px] border-[#757897] border-[1px]'>
+    <div className='w-full flex justify-between items-start pl-[36px] pr-[55px] pt-[41px] pb-[46px] bg-[#FFFFFF] rounded-[15px] border-[#757897] border'>
     <div className='flex flex-col justify-between items-start gap-[171px]'>
       <div className='flex-col justify-between items-center'>
       <h2 className='font-inter  font-medium text-[36px]'>Team Cloud</h2>

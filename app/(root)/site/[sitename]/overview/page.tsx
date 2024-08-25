@@ -40,12 +40,12 @@ const Overview: React.FC = () => {
   ];
 
   return (
-    <div className='h-hull flex flex-col justify-start items-center gap-[58px]'>
+    <div className='h-hull flex flex-col justify-start items-center gap-[58px] pb-44'>
       <Card item={'Site overview'} />
-      <div className='w-full flex flex-col justify-between items-start pl-[22px] pr-[4.98px] pb-[47px] bg-white rounded-[19px] gap-[28px]'>
+      <div className='w-full flex flex-col justify-between items-start pl-1 pr-[4.98px] pb-[47px] bg-white rounded-[19px] gap-[28px]'>
         <Progress value={progress} />
         <div className='w-full flex flex-col justify-between items-center gap-[22px]'>
-          <div className='w-full flex justify-between items-center border-b-2 border-[#757897] pb-[23px]'>
+          <div className='w-full flex justify-between items-center border-b-2 border-[#757897] pb-[23px] pr-8'>
             <h2 className='font-lato font-bold text-3xl'>Set up your site</h2>
             <button>
               <Image width={38} height={40} src={'/images/progress__close.svg'} alt='Close' />

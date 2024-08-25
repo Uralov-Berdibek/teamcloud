@@ -31,7 +31,7 @@ const Configuration = (props: Props) => {
 
 
   return(
-    <div className='flex flex-col justify-between items-center gap-8'>
+    <div className='flex flex-col justify-between items-center gap-8 pb-14'>
       <Card item={'Site configuration'}/>
       <div className='w-full bg-white rounded-[19px] pt-5 pb-24 pl-6 pr-7 flex flex-col justify-between items-start gap-11'>
         <div className='w-full flex justify-start border-[#757897]  border-b-2 pb-5'>
