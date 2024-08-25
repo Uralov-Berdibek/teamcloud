@@ -23,7 +23,13 @@ interface Step {
   description: string;
 }
 
-const Overview: React.FC = () => {
+interface OverviewProps {
+  params: {
+    sitename: string;
+  };
+}
+
+const Overview: React.FC<OverviewProps> = ({params}) => {
   const [progress, setProgress] = useState<number>(0);
 
   const handleChange = (num: number) => {
