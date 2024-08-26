@@ -16,32 +16,32 @@ const SidebarItem = [
   {
     name: 'Site configuration',
     icon: <TbWorldWww className='mr-2 text-3xl' />,
-    link: '/configuration',
+    link: '/site/berdibek/configuration',
     isActive: false,
   },
   {
     name: 'Deploys',
     icon: <FiSettings className='mr-2 text-3xl' />,
-    link: '/deploys',
+    link: `/site/berdibek/deploys`,
     isActive: false,
   },
   {
     name: 'Logs',
     icon: <SiGoogledocs className='mr-2 text-3xl' />,
-    link: '/logs',
+    link: '/site/berdibek/logs',
     isActive: false,
   },
   {
     name: 'Integrations',
     icon: <FiHelpCircle className='mr-2 text-3xl' />,
-    link: '/integrations',
+    link: '/site/berdibek/integrations',
     isActive: false,
   },
 ];
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className='flex h-screen bg-gray-100'>
+    <div className='flex h-auto min-h-screen bg-gray-100'>
       <Sidebar items={SidebarItem} />
       <main className='flex-1 p-6 relative ml-64'>
         <Header />

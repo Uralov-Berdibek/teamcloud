@@ -11,7 +11,7 @@ import RegisterModal from '../../../components/auth/register-modal';
 import useRegisterModal from '../../../hooks/useRegisterModal';
 import useLoginModal from '../../../hooks/useLoginModal';
 import LoginModal from '../../../components/auth/login-modal';
-import useAuthStore from '../../../hooks/useAuthStore';
+import useAuthStore from '../../../hooks/useAuth';
 import Link from 'next/link';
 
 const Auth = () => {

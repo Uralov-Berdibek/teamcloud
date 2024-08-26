@@ -1,6 +1,6 @@
 import { X } from 'lucide-react';
 import { ReactElement } from 'react';
-import { Dialog, DialogContent } from '../ui/dialog';
+import { Dialog, DialogContent, DialogTitle } from '../ui/dialog';
 import { cn } from '@/lib/utils';
 
 interface ModalProps {
@@ -27,6 +27,7 @@ export default function Modal({
       <DialogContent
         className={cn('bg-[#fff] p-1', isEditing && 'h-[80vh] overflow-x-hidden overflow-y-auto')}
       >
+        <DialogTitle></DialogTitle>
         <div className='flex items-center gap-6'>
           <button className='p-1 border-0 text-black hover:opacity-70 transition w-fit'>
             <X size={28} onClick={onClose} />

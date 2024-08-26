@@ -12,25 +12,14 @@ import Modal from '../shared/modal';
 import Button from '../ui/button';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import Cookies from 'js-cookie'; // To handle cookies
 
 export default function LoginModal() {
   const [error, setError] = useState('');
-  const [data, setData] = useState([]);
   const form = useForm();
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const router = useRouter();
-
-  useEffect(() => {
-    axios
-      .get('http://localhost:8090/api/v1/user')
-      .then((response) => {
-        setData(response.data); // Javobdan olingan ma'lumotlarni state-ga saqlash
-      })
-      .catch((error) => {
-        console.error('There was an error!', error);
-      });
-  }, []);
 
   const onToggle = useCallback(() => {
     loginModal.onClose();
@@ -41,11 +30,18 @@ export default function LoginModal() {
     try {
       const response = await axios.post('http://localhost:8090/api/v1/auth/authenticate', formData);
 
-      // Save tokens to cookies/local storage
-      localStorage.setItem('accessToken', response.data.accessToken);
-      document.cookie = `refreshToken=${response.data.refreshToken}; path=/`;
+      // Extract tokens from response headers
+      const accessToken = response.headers['authorization'];
+      const refreshToken = response.headers['x-refresh-token'];
 
-      // Redirect to dashboard
+      // Store the tokens
+      localStorage.setItem('accessToken', accessToken); // Store the access token
+      Cookies.set('refreshToken', refreshToken, { expires: 7, secure: true }); // Store the refresh token in a cookie
+
+      // Set the access token in default headers for future requests
+      axios.defaults.headers.common['Authorization'] = accessToken;
+
+      // Redirect to the dashboard
       router.push(`/teams/berdibek`);
     } catch (err: any) {
       setError(err.response?.data?.message || 'An error occurred');
