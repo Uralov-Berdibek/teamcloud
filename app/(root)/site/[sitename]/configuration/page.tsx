@@ -35,7 +35,7 @@ const Configuration = (props: Props) => {
       <Card item={'Site configuration'}/>
       <div className='w-full bg-white rounded-[19px] pt-5 pb-24 pl-6 pr-7 flex flex-col justify-between items-start gap-11'>
         <div className='w-full flex justify-start border-[#757897]  border-b-2 pb-5'>
-          <h2 className='font-lato font-medium text-4xl'>Site information</h2>
+          <h2 className='font-lato text-2xl font-semibold text-[#051F61]'>Site information</h2>
         </div>
         <div className='w-full flex flex-col justify-between items-start gap-5'>
           {

@@ -21,7 +21,7 @@ interface Step {
   description: string;
 }
 
-const Overview = ({ params }: { params: { sitename: string } }) => {
+const Overview: React.FC = () => {
   const [progress, setProgress] = useState<number>(0);
 
   const handleChange = (num: number) => {
