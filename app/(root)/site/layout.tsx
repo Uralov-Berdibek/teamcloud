@@ -16,25 +16,25 @@ const SidebarItem = [
   {
     name: 'Site configuration',
     icon: <TbWorldWww className='mr-2 text-3xl' />,
-    link: 'site/asadulloh/configuration',
+    link: '/configuration',
     isActive: false,
   },
   {
     name: 'Deploys',
     icon: <FiSettings className='mr-2 text-3xl' />,
-    link: 'site/asadulloh/deploys',
+    link: '/deploys',
     isActive: false,
   },
   {
     name: 'Logs',
     icon: <SiGoogledocs className='mr-2 text-3xl' />,
-    link: 'site/asadulloh/logs',
+    link: '/logs',
     isActive: false,
   },
   {
     name: 'Integrations',
     icon: <FiHelpCircle className='mr-2 text-3xl' />,
-    link: 'site/asadulloh/integrations',
+    link: '/integrations',
     isActive: false,
   },
 ];

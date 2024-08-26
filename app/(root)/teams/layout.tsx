@@ -7,23 +7,10 @@ import { RiHome6Line } from 'react-icons/ri';
 import { TbWorldWww } from 'react-icons/tb';
 import { FiHelpCircle, FiSettings } from 'react-icons/fi';
 import { SiGoogledocs } from 'react-icons/si';
-import axios from 'axios';
+import useAuth from '../../../hooks/useAuth';
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get('http://localhost:8090/api/v1/user')
-      .then((response) => {
-        const userData = response.data; // Birinchi foydalanuvchini olish
-        setData(userData);
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error('There was an error!', error);
-      });
-  }, []);
+  // useAuth();
 
   const sidebarItems = [
     {
