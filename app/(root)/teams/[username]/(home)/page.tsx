@@ -7,7 +7,8 @@ import RecentSites from '../../../../../components/shared/recent-sites';
 const sitesData = [
   {
     id: 1,
-    name: 'portfolio.cloud.app',
+    name: 'portfolio',
+    link: 'portfolio.cloud.app',
     date: 'Sep 25, 2022, 13:25 PM',
     owner: 'John Deo',
     fileSize: '3.9 MB',
@@ -15,7 +16,8 @@ const sitesData = [
   },
   {
     id: 2,
-    name: 'blog.cloud.app',
+    name: 'blog',
+    link: 'blog.cloud.app',
     date: 'Oct 02, 2022, 10:00 AM',
     owner: 'Jane Smith',
     fileSize: '2.4 MB',
@@ -24,7 +26,8 @@ const sitesData = [
   },
   {
     id: 3,
-    name: 'google.cloud.app',
+    name: 'google-cloud',
+    link: 'google.cloud.app',
     date: 'Oct 02, 2024, 12:00 AM',
     owner: 'Anvar Kim',
     fileSize: '2.8 MB',
@@ -33,7 +36,8 @@ const sitesData = [
   },
   {
     id: 4,
-    name: 'twitter.cloud.app',
+    name: 'twitter',
+    link: 'twitter.cloud.app',
     date: 'Oct 30, 2024, 10:00 AM',
     owner: 'Ana de Armas',
     fileSize: '23.9 MB',
@@ -42,7 +46,8 @@ const sitesData = [
   },
   {
     id: 5,
-    name: 'team.cloud.app',
+    name: 'team-cloud',
+    link: 'team.cloud.app',
     date: 'Oct 12, 2023, 10:00 AM',
     owner: 'Jane Evens',
     fileSize: '1.9 MB',

@@ -9,10 +9,9 @@ import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '../ui/form';
 import { Input } from '../ui/input';
 import Modal from '../shared/modal';
-import Button from '../ui/button';
+import ButtonAuth from '../shared/button';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import Cookies from 'js-cookie'; // To handle cookies
 
 export default function LoginModal() {
   const [error, setError] = useState('');
@@ -30,16 +29,12 @@ export default function LoginModal() {
     try {
       const response = await axios.post('http://localhost:8090/api/v1/auth/authenticate', formData);
 
-      // Extract tokens from response headers
-      const accessToken = response.headers['authorization'];
-      const refreshToken = response.headers['x-refresh-token'];
+      // Assuming the response contains accessToken and refreshToken
+      const { accessToken, refreshToken } = response.data;
 
-      // Store the tokens
-      localStorage.setItem('accessToken', accessToken); // Store the access token
-      Cookies.set('refreshToken', refreshToken, { expires: 7, secure: true }); // Store the refresh token in a cookie
-
-      // Set the access token in default headers for future requests
-      axios.defaults.headers.common['Authorization'] = accessToken;
+      // Store the tokens in localStorage or cookies for future requests
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
 
       // Redirect to the dashboard
       router.push(`/teams/berdibek`);
@@ -47,6 +42,57 @@ export default function LoginModal() {
       setError(err.response?.data?.message || 'An error occurred');
     }
   };
+
+  const refreshAccessToken = async () => {
+    try {
+      const refreshToken = localStorage.getItem('refreshToken');
+      const response = await axios.post('http://localhost:8090/api/v1/auth/refresh-token', {
+        refreshToken,
+      });
+
+      // Update the access token
+      const { accessToken } = response.data;
+      localStorage.setItem('accessToken', accessToken);
+
+      return accessToken;
+    } catch (err) {
+      console.error('Unable to refresh token', err);
+      // Optionally redirect to login
+    }
+  };
+
+  axios.interceptors.request.use(
+    async (config) => {
+      let accessToken = localStorage.getItem('accessToken');
+
+      // Add access token to headers
+      config.headers.Authorization = `Bearer ${accessToken}`;
+
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    },
+  );
+
+  axios.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+      const originalRequest = error.config;
+
+      if (error.response.status === 401 && !originalRequest._retry) {
+        originalRequest._retry = true;
+
+        // Attempt to refresh the token
+        const newAccessToken = await refreshAccessToken();
+
+        axios.defaults.headers.common['Authorization'] = `Bearer ${newAccessToken}`;
+        return axios(originalRequest);
+      }
+
+      return Promise.reject(error);
+    },
+  );
 
   const bodyContent = (
     <Form {...form}>
@@ -82,7 +128,7 @@ export default function LoginModal() {
             </FormItem>
           )}
         />
-        <Button label={'Login'} type='submit' secondary fullWidth padding />
+        <ButtonAuth label={'Login'} type='submit' secondary fullWidth padding />
       </form>
     </Form>
   );

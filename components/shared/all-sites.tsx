@@ -7,6 +7,7 @@ import Link from 'next/link';
 type Site = {
   id: number;
   name: string;
+  link: string;
   date: string;
   owner: string;
   fileSize: string;
@@ -31,14 +32,18 @@ const AllSites = ({ sites }: Props) => {
       </div>
       <div className='grid grid-cols-3 gap-4'>
         {sites.map((site) => (
-          <div key={site.id} className='p-6 bg-white rounded-lg shadow cursor-pointer'>
+          <Link
+            href={`site/${site.name}`}
+            key={site.id}
+            className='p-6 bg-white rounded-lg shadow cursor-pointer'
+          >
             <div className='flex justify-between mb-10'>
               <div className='flex items-center'>
                 <div className='bg-[#cbdfff] w-[40px] h-[40px] flex items-center justify-center rounded-lg'>
                   <IoIosFolder className='text-[#0061FF]' />
                 </div>
                 <div className='ml-2'>
-                  <h4 className='text-[#051F61]'>{site.name}</h4>
+                  <h4 className='text-[#051F61]'>{site.link}</h4>
                   <p className='text-[#757897]'>{site.date}</p>
                 </div>
               </div>
@@ -62,7 +67,7 @@ const AllSites = ({ sites }: Props) => {
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

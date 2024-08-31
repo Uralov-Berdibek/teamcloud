@@ -4,9 +4,8 @@ import { useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import { AiFillGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import Button from '../../../components/ui/button';
+import ButtonAuth from '../../../components/shared/button';
 import RegisterModal from '../../../components/auth/register-modal';
 import useRegisterModal from '../../../hooks/useRegisterModal';
 import useLoginModal from '../../../hooks/useLoginModal';
@@ -48,7 +47,7 @@ const Auth = () => {
             <h2 className='font-bold text-3xl mb-4'>Join today.</h2>
             <div className='flex flex-col space-y-2'>
               <Link href='http://localhost:8090/oauth2/authorization/google'>
-                <Button
+                <ButtonAuth
                   onClick={() => router.push('/dashboard')}
                   label={
                     <div className='flex gap-2 items-center justify-center'>
@@ -61,7 +60,7 @@ const Auth = () => {
                 />
               </Link>
               <Link href='http://localhost:8090/oauth2/authorization/github'>
-                <Button
+                <ButtonAuth
                   label={
                     <div className='flex gap-2 items-center justify-center'>
                       <AiFillGithub />
@@ -77,7 +76,7 @@ const Auth = () => {
                 <p className='mx-4'>or</p>
                 <div className='h-px bg-gray-700 w-1/2' />
               </div>
-              <Button label={'Create account'} fullWidth onClick={onOpenRegisterModal} />
+              <ButtonAuth label={'Create account'} fullWidth onClick={onOpenRegisterModal} />
               <div className='text-[10px] text-gray-400'>
                 By signing up, you agree to the{' '}
                 <span className='text-sky-500'>Terms of Service</span> and
@@ -88,7 +87,7 @@ const Auth = () => {
           </div>
           <div className='w-full md:w-[60%]'>
             <h3 className='font-medium text-xl mb-4'>Already have an account?</h3>
-            <Button label={'Sign in'} fullWidth outline onClick={onOpenLoginModal} />
+            <ButtonAuth label={'Sign in'} fullWidth outline onClick={onOpenLoginModal} />
           </div>
         </div>
       </div>

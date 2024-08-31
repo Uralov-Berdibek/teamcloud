@@ -2,7 +2,7 @@ import useLoginModal from '@/hooks/useLoginModal';
 import useRegisterModal from '@/hooks/useRegisterModal';
 import { AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
-import Button from '../ui/button';
+import ButtonAuth from '../shared/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '../ui/form';
 import { Input } from '../ui/input';
 import Modal from '../shared/modal';
@@ -170,7 +170,7 @@ function RegisterStep1({
             )}
           />
         </div>
-        <Button label={'Next'} type='submit' secondary fullWidth padding />
+        <ButtonAuth label={'Next'} type='submit' secondary fullWidth padding />
       </form>
     </Form>
   );
@@ -258,7 +258,7 @@ function RegisterStep2({ data, onSuccess }: { data: any; onSuccess: () => void }
             .
           </p>
         </div>
-        <Button label={'Register'} type='submit' secondary fullWidth padding />
+        <ButtonAuth label={'Register'} type='submit' secondary fullWidth padding />
       </form>
     </Form>
   );
