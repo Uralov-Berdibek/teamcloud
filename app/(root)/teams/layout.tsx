@@ -7,40 +7,40 @@ import { RiHome6Line } from 'react-icons/ri';
 import { TbWorldWww } from 'react-icons/tb';
 import { FiHelpCircle, FiSettings } from 'react-icons/fi';
 import { SiGoogledocs } from 'react-icons/si';
-import useAuth from '../../../hooks/useAuth';
+import { useUsernameStore } from '../../../hooks/store';
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
-  // useAuth();
+  const username = useUsernameStore((state) => state.username);
 
   const sidebarItems = [
     {
       name: 'Home',
       icon: <RiHome6Line className='mr-2 text-3xl' />,
-      link: `/teams/berdibek/`,
+      link: `/teams/${username}/`,
       isActive: true,
     },
     {
       name: 'Domains',
       icon: <TbWorldWww className='mr-2 text-3xl' />,
-      link: `/teams/berdibek/domains`,
+      link: `/teams/${username}/domains`,
       isActive: false,
     },
     {
       name: 'Team Settings',
       icon: <FiSettings className='mr-2 text-3xl' />,
-      link: `/teams/berdibek/team-settings`,
+      link: `/teams/${username}/team-settings`,
       isActive: false,
     },
     {
       name: 'Documentation',
       icon: <SiGoogledocs className='mr-2 text-3xl' />,
-      link: `/teams/berdibek/docs`,
+      link: `/teams/${username}/docs`,
       isActive: false,
     },
     {
       name: 'Support',
       icon: <FiHelpCircle className='mr-2 text-3xl' />,
-      link: `/teams/berdibek/support`,
+      link: `/teams/${username}/support`,
       isActive: false,
     },
   ];

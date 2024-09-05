@@ -11,6 +11,7 @@ import { Input } from '../ui/input';
 import Modal from '../shared/modal';
 import ButtonAuth from '../shared/button';
 import { useRouter } from 'next/navigation';
+import { useUsernameStore } from '../../hooks/store';
 import axios from 'axios';
 
 export default function LoginModal() {
@@ -20,6 +21,8 @@ export default function LoginModal() {
   const registerModal = useRegisterModal();
   const router = useRouter();
 
+  const setUsername = useUsernameStore((state) => state.setUsername);
+
   const onToggle = useCallback(() => {
     loginModal.onClose();
     registerModal.onOpen();
@@ -28,18 +31,18 @@ export default function LoginModal() {
   const onSubmit = async (formData: any) => {
     try {
       const response = await axios.post('http://localhost:8090/api/v1/auth/authenticate', formData);
-
-      // Assuming the response contains accessToken and refreshToken
       const { accessToken, refreshToken } = response.data;
+      const email = formData.email;
+      const username = email.split('@')[0];
 
-      // Store the tokens in localStorage or cookies for future requests
+      setUsername(username); // Update Zustand store with username
+
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
 
-      // Redirect to the dashboard
-      router.push(`/teams/berdibek`);
+      router.push(`/teams/${username}`);
     } catch (err: any) {
-      setError(err.response?.data?.message || 'An error occurred');
+      setError(err.response?.message || 'An error occurred');
     }
   };
 

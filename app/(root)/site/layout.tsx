@@ -10,31 +10,31 @@ const SidebarItem = [
   {
     name: 'Site Overwiev',
     icon: <RiHome6Line className='mr-2 text-3xl' />,
-    link: '/',
+    link: '/site/teamcloud',
     isActive: true,
   },
   {
     name: 'Site configuration',
     icon: <TbWorldWww className='mr-2 text-3xl' />,
-    link: '/configuration',
+    link: '/site/teamcloud/configuration',
     isActive: false,
   },
   {
     name: 'Deploys',
     icon: <FiSettings className='mr-2 text-3xl' />,
-    link: '/deploys',
+    link: '/site/teamcloud/deploys',
     isActive: false,
   },
   {
     name: 'Logs',
     icon: <SiGoogledocs className='mr-2 text-3xl' />,
-    link: '/logs',
+    link: '/site/teamcloud/logs',
     isActive: false,
   },
   {
     name: 'Integrations',
     icon: <FiHelpCircle className='mr-2 text-3xl' />,
-    link: '/integrations',
+    link: '/site/teamcloud/integrations',
     isActive: false,
   },
 ];
