@@ -2,8 +2,12 @@ import React from 'react';
 import { FiSearch, FiSettings, FiHelpCircle } from 'react-icons/fi';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Link from 'next/link';
+import useFilter from '@/app/(root)/teams/store/fetch';
 
 const Header = () => {
+
+  const {filterByName} = useFilter()
+
   return (
     <header className='flex items-center justify-between mb-8'>
       <div>
@@ -13,7 +17,7 @@ const Header = () => {
       <div className='flex items-center'>
         <div className='flex items-center px-4 py-2 border rounded-lg bg-white'>
           <FiSearch className='mr-2 text-[#757897]' />
-          <input type='text' placeholder='Search anything here' className='focus:outline-none' />
+          <input type='text' placeholder='Search anything here' className='focus:outline-none' onChange={(even)=>filterByName(even.target.value)}/>
         </div>
         <Link
           href='/teams/berdibek/settings'
