@@ -80,6 +80,13 @@ body {
   }
 }
 
+@layer {
+  .clip{
+    border: 1px dashed #0061FF;
+    border-radius: 40px;
+  }
+}
+
 @media (max-width: 1024px) {
   .sidebar {
     width: 100%;

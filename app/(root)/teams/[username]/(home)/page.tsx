@@ -1,8 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, {  useEffect } from 'react';
 import AllSites from '../../../../../components/shared/all-sites';
 import RecentSites from '../../../../../components/shared/recent-sites';
+import useFilter from '../../store/fetch';
+
 
 const sitesData = [
   {
@@ -42,7 +44,7 @@ const sitesData = [
     owner: 'Ana de Armas',
     fileSize: '23.9 MB',
     avatarUrl:
-      'https://avatars.mds.yandex.net/i?id=423ebd40b07d5b760b0443ab189cfb2924d706a4-4782559-images-thumbs&n=13',
+       'https://avatars.mds.yandex.net/i?id=423ebd40b07d5b760b0443ab189cfb2924d706a4-4782559-images-thumbs&n=13',
   },
   {
     id: 5,
@@ -58,10 +60,18 @@ const sitesData = [
 ];
 
 const Home = ({ params }: { params: { username: string } }) => {
+
+  const {filtered, setItems} = useFilter();
+
+  useEffect(()=>{
+    setItems(sitesData)
+  },[setItems])
+
+
   return (
     <div>
-      <AllSites sites={sitesData} />
-      <RecentSites sites={sitesData} />
+      <AllSites sites={filtered} />
+      <RecentSites sites={filtered} />
     </div>
   );
 };
